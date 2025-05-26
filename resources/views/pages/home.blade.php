@@ -70,9 +70,8 @@
               <div class="icon">
                 <i class="fa-solid fa-compass-drafting"></i>
               </div>
-              <h3>Ledo Markt</h3>
-              <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci
-                eos earum corrupti.</p>
+              <h3>Top-Quality Civil Engineering & Contracting Services in Seoni</h3>
+              <p>We provide experienced civil engineers and skilled contractors dedicated to delivering top-notch construction and infrastructure solutions in Seoni.</p>
             </div>
           </div><!-- End Service Item -->
 
@@ -169,10 +168,12 @@
                 <div class="col-md-12 text-center">
                   <div class="error-message"></div>
                   @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
+                      <div class="alert alert-success alert-dismissible fade show" role="alert">
+                          {{ session('success') }}
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
                   @endif
+
 
                   <button type="submit">Submit</button>
                 </div>
