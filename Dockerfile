@@ -1,6 +1,6 @@
 FROM php:8.1-apache
 
-# Install system packages
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
     libpng-dev \
@@ -19,21 +19,24 @@ RUN a2enmod rewrite
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy project files into container
-COPY . /var/www/html/
+# Copy Laravel project
+COPY . /var/www/html
 
 # Set correct permissions
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
+RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
 
-# Set Apache to use Laravel's public folder as web root
+# Set Apache to serve from Laravel's public folder
 RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/src/public|g' /etc/apache2/sites-available/000-default.conf
 
-# Add index.php fallback to handle routes
+# Add index.php directory permissions
 RUN echo '<Directory /var/www/html/src/public>\n\
     Options Indexes FollowSymLinks\n\
     AllowOverride All\n\
     Require all granted\n\
 </Directory>' >> /etc/apache2/apache2.conf
+
+# ✅ Install Composer manually
+RUN curl -sS https://getcomposer.org/installer | php && \
+    mv composer.phar /usr/local/bin/composer
 
 EXPOSE 80
