@@ -16,8 +16,11 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
 # ✅ Install MongoDB PHP extension
-RUN pecl install mongodb && \
-    docker-php-ext-enable mongodb
+# Replace this:
+# RUN pecl install mongodb && docker-php-ext-enable mongodb
+
+# With this specific version:
+RUN pecl install mongodb-1.15.0 && docker-php-ext-enable mongodb
 
 # Enable Apache rewrite module
 RUN a2enmod rewrite
